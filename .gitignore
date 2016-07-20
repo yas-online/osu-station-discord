@@ -1,0 +1,6 @@
+/.vs
+/cfg
+/node_modules
+/obj
+/typings*
+*.log

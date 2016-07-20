@@ -1,0 +1,5 @@
+{
+	"check-leaks": true,
+	"reporter": "spec",
+	"ui": "bdd"
+}

@@ -1,0 +1,38 @@
+{
+	"name": "osu!station-discord",
+	"version": "0.1.0",
+	"description": "osu!station, the radio featuring songs from osu! beatmaps",
+	"license": "Private",
+	"author":
+	{
+		"name": "YaS-Online",
+		"email": "support@yas-online.net",
+		"url": "https://yas-online.net"
+	},
+	"repository": "yas-online/osustation-discord",
+
+	"private": true,
+	"main": "./lib/main",
+	"scripts":
+	{
+		"start": "node ./lib/main",
+		"test": "mocha",
+		"test-watch": "mocha --watch",
+		"debug": "node debug ./lib/main",
+		"watch": "nodemon --ignore test/ --ignore cfg/"
+	},
+
+	"dependencies":
+	{
+		"discordie": "qeled/discordie",
+		"lame": "*"
+	},
+
+	"devDependencies":
+	{
+		"chai": "*",
+		"chai-string": "*",
+		"chai-fs": "chaijs/chai-fs",
+		"pre-commit": "*"
+	}
+}
