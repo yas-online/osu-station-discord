@@ -1,0 +1,25 @@
+init:
+  - git config --global core.autocrlf true
+
+environment:
+  matrix:
+    - node_js: Stable
+    - node_js: 6
+    - node_js: 5
+
+platform:
+  - x86
+  - x64
+
+install:
+  - ps: Install-Product node $env:node_js $env:platform
+  - npm install -g mocha
+  - npm install
+
+test_script:
+  - node --version
+  - npm --version
+  - npm test
+
+build: off
+deploy: off
