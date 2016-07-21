@@ -20,4 +20,4 @@ You'll be prompted to which of the guilds (servers) you want to add the bot to (
 ## Credits
 
 - [Neico](https://github.com/neico) - Creator
-- Pixeldesu - Logo
+- [pixeldesu](https://github.com/pixeldesu) - Logo
