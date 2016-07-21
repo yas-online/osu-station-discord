@@ -15,6 +15,8 @@ Click this: [<img src="https://discordapp.com/assets/fc0b01fe10a0b8c602fb0106d81
 
 You'll be prompted to which of the guilds (servers) you want to add the bot to (requires "Manage Server" permission)
 
+**Note:** the bot currently only looks for a "osu!station" or "osustation" voice channel, so make sure you have that before inviting the bot over (might be configurable in the future)
+
 ## Credits
 
 - [Neico](https://github.com/neico) - Creator
