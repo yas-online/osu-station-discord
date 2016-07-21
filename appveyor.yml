@@ -5,7 +5,6 @@ environment:
   matrix:
     - node_js: Stable
     - node_js: 6
-    - node_js: 5
 
 platform:
   - x86
