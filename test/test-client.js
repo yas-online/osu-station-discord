@@ -5,7 +5,7 @@ const should = chai.should();
 chai.use( require( "chai-string" ) );
 chai.use( require( "chai-fs" ) );
 
-const Client = require( "../lib/client" );
+//const Client = require( "../lib/client" );
 
 describe( "Client", function()
 {
