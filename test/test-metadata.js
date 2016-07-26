@@ -11,7 +11,7 @@ describe( "Metadata", function()
 
 	before( function()
 	{
-		hChild = child.fork( __dirname + "/../lib/metadata" );
+		hChild = child.fork( __dirname + "/../lib/metadata", [], { execArgv: [] } );
 	} );
 
 	it( "should retrive metadata from the sub-process", function( pDone )
@@ -31,26 +31,34 @@ describe( "Metadata", function()
 
 			hMessage.should.have.property( "game" );
 			hMessage.game.should.be.a( "string" );
+			hMessage.game.should.be.equal( hMessage.title + " by " + hMessage.artist );
 
 			pDone();
 		} );
 
-		hChild.send( { Game: null } ).should.be.true;
+		hChild.send( { type: "init", game: null } ).should.be.true;
 	} );
 
 	it( "should shutdown the sub-process gracefully", function( pDone )
 	{
-		hChild.once( "exit", ( iCode, sSignal ) =>
+		if( hChild && hChild.connected )
 		{
-			iCode.should.exist;
-			iCode.should.be.a( "number" );
-			iCode.should.be.equal( 0 );
+			hChild.send( { type: "shutdown" } );
 
-			should.not.exist( sSignal );
+			hChild.once( "exit", ( iCode, sSignal ) =>
+			{
+				iCode.should.exist;
+				iCode.should.be.a( "number" );
+				iCode.should.be.equal( 0 );
 
-			pDone();
-		} );
+				should.not.exist( sSignal );
 
-		hChild.disconnect();
+				hChild = null;
+
+				pDone();
+			} );
+
+			hChild.disconnect();
+		}
 	} );
 } );
