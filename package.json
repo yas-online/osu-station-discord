@@ -34,7 +34,8 @@
 	"dependencies":
 	{
 		"discordie": "qeled/discordie#dev",
-		"lame": "*"
+		"lame": "*",
+		"node-opus": "*"
 	},
 
 	"devDependencies":
