@@ -24,16 +24,16 @@
 	"main": "./lib/main",
 	"scripts":
 	{
-		"start": "node ./lib/main",
-		"test": "mocha",
-		"test-watch": "mocha --watch",
-		"debug": "node debug ./lib/main",
-		"watch": "nodemon --ignore test/ --ignore cfg/"
+		"start": "node --harmony ./lib/main",
+		"test": "mocha --harmony",
+		"test-watch": "mocha --harmony --watch",
+		"debug": "node --harmony debug ./lib/main",
+		"watch": "nodemon --harmony --ignore test/ --ignore cfg/"
 	},
 
 	"dependencies":
 	{
-		"discordie": "qeled/discordie",
+		"discordie": "qeled/discordie#dev",
 		"lame": "*"
 	},
 

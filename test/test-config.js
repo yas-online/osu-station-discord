@@ -67,8 +67,7 @@ describe( "Config", function()
 			{
 				should.exist( cfg );
 				cfg.should.be.a( "Config" );
-				// Symbol.hasInstance() isn't called without --harmony, but discordie doesn't work with --harmony *sigh*
-				//cfg.should.be.a.instanceof( Config );
+				cfg.should.be.a.instanceof( Config );
 
 				( __dirname + "/cfg/default.json" ).should.be.a.file;
 			} );
