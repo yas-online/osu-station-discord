@@ -10,8 +10,8 @@ const path = require( "path" );
 const os =  require( "os" );
 const util = require( "util" );
 
-const sConfigPath = path.resolve( "./cfg" );
-const Config = require( "../lib/config" );
+const g_sConfigPath = path.resolve( __dirname + "/cfg" );
+const Config = require( __dirname + "/../lib/config" );
 
 function CreateTestConfig( sTestCategory, sTestName, TestValue = true, bTestComments = false )
 {
@@ -19,7 +19,7 @@ function CreateTestConfig( sTestCategory, sTestName, TestValue = true, bTestComm
 
 	if( bTestComments ) sContents += "" +
 	"/*" + os.EOL +
-	"	Testing multiline comments is a grand thing" + os.EOL +
+	"	Testing multi-line comments is a grand thing" + os.EOL +
 	"*/" + os.EOL;
 
 	sContents += "" +
@@ -43,13 +43,7 @@ describe( "Config", function()
 
 	before( function()
 	{
-		try
-		{
-			fs.mkdirSync( sConfigPath );
-		}
-		catch( hException )
-		{
-		}
+		Config.SetPath( g_sConfigPath );
 	} );
 
 	afterEach( function()
@@ -62,17 +56,7 @@ describe( "Config", function()
 	*/
 	describe( "Class", function()
 	{
-		before( function()
-		{
-			fs.writeFileSync( path.join( sConfigPath, "default.json" ), CreateTestConfig( "init", "test" ) );
-		} );
-
-		after( function()
-		{
-			fs.unlinkSync( path.join( sConfigPath, "default.json" ) );
-		} );
-
-		describe( "initialisation", function()
+		describe( "initialization", function()
 		{
 			before( function()
 			{
@@ -83,7 +67,10 @@ describe( "Config", function()
 			{
 				should.exist( cfg );
 				cfg.should.be.a( "Config" );
+				// Symbol.hasInstance() isn't called without --harmony, but discordie doesn't work with --harmony *sigh*
 				//cfg.should.be.a.instanceof( Config );
+
+				( __dirname + "/cfg/default.json" ).should.be.a.file;
 			} );
 		} );
 
@@ -112,28 +99,28 @@ describe( "Config", function()
 	{
 		before( function()
 		{
-			fs.writeFileSync( path.join( sConfigPath, "default.json" ), CreateTestConfig( "constructor", "test1" ) );
-			fs.writeFileSync( path.join( sConfigPath, "test.json" ), CreateTestConfig( "constructor", "test2" ) );
-			fs.writeFileSync( path.join( sConfigPath, "test.cfg" ), CreateTestConfig( "constructor", "test3" ) );
+			fs.writeFileSync( path.join( g_sConfigPath, "default.json" ), CreateTestConfig( "constructor", "test1" ) );
+			fs.writeFileSync( path.join( g_sConfigPath, "test.json" ), CreateTestConfig( "constructor", "test2" ) );
+			fs.writeFileSync( path.join( g_sConfigPath, "test.cfg" ), CreateTestConfig( "constructor", "test3" ) );
 
 			try
 			{
-				fs.mkdirSync( path.join( sConfigPath, "Test" ) );
+				fs.mkdirSync( path.join( g_sConfigPath, "Test" ) );
 			}
 			catch( hException )
 			{
 			}
 
-			fs.writeFileSync( path.join( sConfigPath, "Test", "test.json" ), CreateTestConfig( "constructor", "test4" ) );
+			fs.writeFileSync( path.join( g_sConfigPath, "Test", "test.json" ), CreateTestConfig( "constructor", "test4" ) );
 		} );
 
 		after( function()
 		{
-			fs.unlinkSync( path.join( sConfigPath, "default.json" ) );
-			fs.unlinkSync( path.join( sConfigPath, "test.json" ) );
-			fs.unlinkSync( path.join( sConfigPath, "test.cfg" ) );
-			fs.unlinkSync( path.join( sConfigPath, "Test", "test.json" ) );
-			fs.rmdirSync( path.join( sConfigPath, "Test" ) );
+			fs.unlinkSync( path.join( g_sConfigPath, "default.json" ) );
+			fs.unlinkSync( path.join( g_sConfigPath, "test.json" ) );
+			fs.unlinkSync( path.join( g_sConfigPath, "test.cfg" ) );
+			fs.unlinkSync( path.join( g_sConfigPath, "Test", "test.json" ) );
+			fs.rmdirSync( path.join( g_sConfigPath, "Test" ) );
 		} );
 
 		describe( "constructor()", function()
@@ -143,11 +130,11 @@ describe( "Config", function()
 				cfg = new Config();
 			} );
 
-			it( "should read default.json inside the cfg subfolder into config object", function()
+			it( "should read default.json inside the cfg sub-folder into config object", function()
 			{
 				should.exist( cfg );
 				cfg.should.be.a( "Config" );
-				"./cfg/default.json".should.be.a.file;
+				( __dirname + "/cfg/default.json" ).should.be.a.file;
 
 				should.exist( cfg.constructor );
 				cfg.constructor.should.be.a( "object" );
@@ -167,11 +154,11 @@ describe( "Config", function()
 				cfg = new Config( null );
 			} );
 
-			it( "should read default.json inside the cfg subfolder into config object", function()
+			it( "should read default.json inside the cfg sub-folder into config object", function()
 			{
 				should.exist( cfg );
 				cfg.should.be.a( "Config" );
-				"./cfg/default.json".should.be.a.file;
+				( __dirname + "/cfg/default.json" ).should.be.a.file;
 
 				should.exist( cfg.constructor );
 				cfg.constructor.should.be.a( "object" );
@@ -191,11 +178,11 @@ describe( "Config", function()
 				cfg = new Config( "test" );
 			} );
 
-			it( "should read test.json inside the cfg subfolder into config object", function()
+			it( "should read test.json inside the cfg sub-folder into config object", function()
 			{
 				should.exist( cfg );
 				cfg.should.be.a( "Config" );
-				"./cfg/test.json".should.be.a.file;
+				( __dirname + "/cfg/test.json" ).should.be.a.file;
 
 				should.exist( cfg.constructor );
 				cfg.constructor.should.be.a( "object" );
@@ -215,11 +202,11 @@ describe( "Config", function()
 				cfg = new Config( "test.cfg" );
 			} );
 
-			it( "should read test.cfg inside the cfg subfolder into config object", function()
+			it( "should read test.cfg inside the cfg sub-folder into config object", function()
 			{
 				should.exist( cfg );
 				cfg.should.be.a( "Config" );
-				"./cfg/test.cfg".should.be.a.file;
+				( __dirname + "/cfg/test.cfg" ).should.be.a.file;
 
 				should.exist( cfg.constructor );
 				cfg.constructor.should.be.a( "object" );
@@ -239,11 +226,11 @@ describe( "Config", function()
 				cfg = new Config( "Test/test" );
 			});
 
-			it( "should read test.json inside the cfg/Test subfolder into config object", function()
+			it( "should read test.json inside the cfg/Test sub-folder into config object", function()
 			{
 				should.exist( cfg );
 				cfg.should.be.a( "Config" );
-				"./cfg/Test/test.json".should.be.a.file;
+				( __dirname + "/cfg/Test/test.json" ).should.be.a.file;
 
 				should.exist( cfg.constructor );
 				cfg.constructor.should.be.a( "object" );
@@ -267,7 +254,7 @@ describe( "Config", function()
 			// that's what I get for tampering with the fs module, oh well...
 			try
 			{
-				let sPath = path.join( sConfigPath, "default.json" );
+				let sPath = path.join( g_sConfigPath, "default.json" );
 				let bExists = fs.accessSync( sPath, fs.constants.F_OK );
 
 				if( typeof bExists === "undefined" || bExists === null || bExists ) fs.unlinkSync( sPath );
@@ -281,16 +268,16 @@ describe( "Config", function()
 		{
 			before( function()
 			{
-				fs.writeFileSync( path.join( sConfigPath, "default.json" ), CreateTestConfig( "exists", "test1" ) );
+				fs.writeFileSync( path.join( g_sConfigPath, "default.json" ), CreateTestConfig( "exists", "test1" ) );
 
 				cfg = new Config( null, CreateTestConfig( "not_exists", "test2" ) );
 			} );
 
-			it( "should create default.json inside the cfg subfolder only if file doesn't exist already", function()
+			it( "should create default.json inside the cfg sub-folder only if file doesn't exist already", function()
 			{
 				should.exist( cfg );
 				cfg.should.be.a( "Config" );
-				"./cfg/default.json".should.be.a.file;
+				( __dirname + "/cfg/default.json" ).should.be.a.file;
 
 				should.exist( cfg.exists );
 				cfg.exists.should.be.a( "object" );
@@ -310,11 +297,11 @@ describe( "Config", function()
 				cfg = new Config( null, CreateTestConfig( "default", "test1" ) );
 			} );
 
-			it( "should create default.json (from string) inside the cfg subfolder and push it's contents into the config object", function()
+			it( "should create default.json (from string) inside the cfg sub-folder and push it's contents into the config object", function()
 			{
 				should.exist( cfg );
 				cfg.should.be.a( "Config" );
-				"./cfg/default.json".should.be.a.file;
+				( __dirname + "/cfg/default.json" ).should.be.a.file;
 
 				should.exist( cfg.default );
 				cfg.default.should.be.a( "object" );
@@ -335,11 +322,11 @@ describe( "Config", function()
 				cfg = new Config( null, CreateTestConfig( "default", "test2", true, true ) );
 			} );
 
-			it( "should create default.json (from string with comments) inside the cfg subfolder and push it's contents into the config object", function()
+			it( "should create default.json (from string with comments) inside the cfg sub-folder and push it's contents into the config object", function()
 			{
 				should.exist( cfg );
 				cfg.should.be.a( "Config" );
-				"./cfg/default.json".should.be.a.file;
+				( __dirname + "/cfg/default.json" ).should.be.a.file;
 
 				should.exist( cfg.default );
 				cfg.default.should.be.a( "object" );
@@ -359,11 +346,11 @@ describe( "Config", function()
 				cfg = new Config( null, { default: { test3: true } } );
 			} );
 
-			it( "should create default.json (from object) inside the cfg subfolder and push it's contents into the config object", function()
+			it( "should create default.json (from object) inside the cfg sub-folder and push it's contents into the config object", function()
 			{
 				should.exist( cfg );
 				cfg.should.be.a( "Config" );
-				"./cfg/default.json".should.be.a.file;
+				( __dirname + "/cfg/default.json" ).should.be.a.file;
 
 				should.exist( cfg.default );
 				cfg.default.should.be.a( "object" );
@@ -383,13 +370,13 @@ describe( "Config", function()
 				cfg = new Config( null );
 			} );
 
-			it( "should create default.json (using CreateDefaultConfig) inside the cfg subfolder and push it's contents into the config object", function()
+			it( "should create default.json (using CreateDefaultConfig) inside the cfg sub-folder and push it's contents into the config object", function()
 			{
 				should.exist( cfg );
 				cfg.should.be.a( "Config" );
 				cfg.CreateDefaultConfig( CreateTestConfig( "default", "test4" ) );
 
-				"./cfg/default.json".should.be.a.file;
+				( __dirname + "/cfg/default.json" ).should.be.a.file;
 
 				should.exist( cfg.default );
 				cfg.default.should.be.a( "object" );
@@ -410,12 +397,12 @@ describe( "Config", function()
 	{
 		before( function()
 		{
-			fs.writeFileSync( path.join( sConfigPath, "default.json" ), CreateTestConfig( "accessor", "test" ) );
+			fs.writeFileSync( path.join( g_sConfigPath, "default.json" ), CreateTestConfig( "accessor", "test" ) );
 		} );
 
 		after( function()
 		{
-			fs.unlinkSync( path.join( sConfigPath, "default.json" ) );
+			fs.unlinkSync( path.join( g_sConfigPath, "default.json" ) );
 		} );
 
 		describe( "array read access", function()
@@ -429,7 +416,7 @@ describe( "Config", function()
 			{
 				should.exist( cfg );
 				cfg.should.be.a( "Config" );
-				"./cfg/default.json".should.be.a.file;
+				( __dirname + "/cfg/default.json" ).should.be.a.file;
 
 				should.exist( cfg["accessor"] );
 				cfg["accessor"].should.be.a( "object" );
@@ -448,7 +435,7 @@ describe( "Config", function()
 			{
 				should.exist( cfg );
 				cfg.should.be.a( "Config" );
-				"./cfg/default.json".should.be.a.file;
+				( __dirname + "/cfg/default.json" ).should.be.a.file;
 
 				should.exist( cfg["accessor"] );
 				cfg["accessor"].should.be.a( "object" );
@@ -477,7 +464,7 @@ describe( "Config", function()
 			{
 				should.exist( cfg );
 				cfg.should.be.a( "Config" );
-				"./cfg/default.json".should.be.a.file;
+				( __dirname + "/cfg/default.json" ).should.be.a.file;
 
 				should.exist( cfg.accessor );
 				cfg.accessor.should.be.a( "object" );
@@ -496,7 +483,7 @@ describe( "Config", function()
 			{
 				should.exist( cfg );
 				cfg.should.be.a( "Config" );
-				"./cfg/default.json".should.be.a.file;
+				( __dirname + "/cfg/default.json" ).should.be.a.file;
 
 				should.exist( cfg.accessor );
 				cfg.accessor.should.be.a( "object" );
@@ -537,7 +524,7 @@ describe( "Config", function()
 
 		after( function()
 		{
-			fs.unlinkSync( path.join( sConfigPath, "default.json" ) );
+			fs.unlinkSync( path.join( g_sConfigPath, "default.json" ) );
 		} );
 
 		describe( "expand key", function()
@@ -551,7 +538,7 @@ describe( "Config", function()
 			{
 				should.exist( cfg );
 				cfg.should.be.a( "Config" );
-				"./cfg/default.json".should.be.a.file;
+				( __dirname + "/cfg/default.json" ).should.be.a.file;
 
 				should.exist( cfg.expand );
 				cfg.expand.should.be.a( "object" );
@@ -567,7 +554,7 @@ describe( "Config", function()
 			{
 				should.exist( cfg );
 				cfg.should.be.a( "Config" );
-				"./cfg/default.json".should.be.a.file;
+				( __dirname + "/cfg/default.json" ).should.be.a.file;
 
 				should.exist( cfg.expand );
 				cfg.expand.should.be.a( "object" );
@@ -588,7 +575,7 @@ describe( "Config", function()
 			{
 				should.exist( cfg );
 				cfg.should.be.a( "Config" );
-				"./cfg/default.json".should.be.a.file;
+				( __dirname + "/cfg/default.json" ).should.be.a.file;
 
 				should.exist( cfg.expand );
 				cfg.expand.should.be.a( "object" );

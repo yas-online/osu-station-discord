@@ -2,10 +2,8 @@
 
 const chai = require( "chai" );
 const should = chai.should();
-chai.use( require( "chai-string" ) );
-chai.use( require( "chai-fs" ) );
 
-//const Main = require( "../lib/main" );
+//const Main = require( __dirname + "/../lib/main" );
 
 describe( "Main", function()
 {

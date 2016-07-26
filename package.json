@@ -10,8 +10,17 @@
 		"url": "https://yas-online.net"
 	},
 	"repository": "yas-online/osustation-discord",
-
+	"bugs": "https://github.com/yas-online/osustation-discord/issues",
 	"private": true,
+
+	"config":
+	{
+		"engine-strict": true
+	},
+	"engines":
+	{
+		"node": ">=6.3.0"
+	},
 	"main": "./lib/main",
 	"scripts":
 	{
