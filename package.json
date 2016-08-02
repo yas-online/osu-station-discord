@@ -40,9 +40,9 @@
 
 	"devDependencies":
 	{
+		"mock-fs": "*",
 		"chai": "*",
 		"chai-string": "*",
-		"chai-fs": "chaijs/chai-fs",
-		"pre-commit": "*"
+		"chai-fs": "chaijs/chai-fs"
 	}
 }
