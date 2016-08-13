@@ -8,7 +8,6 @@ chai.use( require( "chai-fs" ) );
 const fs = require( "fs" );
 const path = require( "path" );
 const os =  require( "os" );
-const util = require( "util" );
 
 const g_sConfigPath = path.resolve( __dirname + "/cfg" );
 const Config = require( __dirname + "/../lib/config" );

@@ -28,12 +28,13 @@
 		"test": "mocha --harmony",
 		"test-watch": "mocha --harmony --watch",
 		"debug": "node --harmony debug ./lib/main",
-		"watch": "nodemon --harmony --ignore test/ --ignore cfg/"
+		"watch": "nodemon --harmony --ignore cfg/ --ignore log/ --ignore test/"
 	},
 
 	"dependencies":
 	{
-		"discordie": "qeled/discordie#dev",
+		"winston": "*",
+		"discordie": "qeled/discordie",
 		"lame": "*",
 		"node-opus": "*"
 	},

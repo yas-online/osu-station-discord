@@ -5,10 +5,11 @@
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
     <Name>osu!station-discord</Name>
     <RootNamespace>osu!station-discord</RootNamespace>
+    <NodeExeArguments>--harmony</NodeExeArguments>
+    <Environment>DEBUG=true</Environment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <NodeExeArguments>--debug</NodeExeArguments>
-    <Environment>DEBUG=1</Environment>
+    <NodeExeArguments>--harmony debug</NodeExeArguments>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -41,29 +42,36 @@
     <Folder Include="test\" />
     <Folder Include="typings\" />
     <Folder Include="typings\globals\" />
+    <Folder Include="typings\globals\chai-string\" />
     <Folder Include="typings\globals\chai\" />
     <Folder Include="typings\globals\mocha\" />
+    <Folder Include="typings\globals\mock-fs\" />
     <Folder Include="typings\globals\node\" />
+    <Folder Include="typings\globals\winston\" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="typings\globals\chai-string\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\chai\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\mocha\index.d.ts" />
+    <TypeScriptCompile Include="typings\globals\mock-fs\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\node\index.d.ts" />
+    <TypeScriptCompile Include="typings\globals\winston\index.d.ts" />
     <TypeScriptCompile Include="typings\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="lib\client.js" />
     <Compile Include="lib\config.js" />
+    <Compile Include="lib\log.js" />
     <Compile Include="lib\main.js" />
     <Compile Include="lib\metadata.js" />
-    <Compile Include="test\test-client.js">
+    <Compile Include="test\test-main.js">
+      <SubType>Code</SubType>
       <TestFramework>Mocha</TestFramework>
     </Compile>
     <Compile Include="test\test-config.js">
       <TestFramework>Mocha</TestFramework>
     </Compile>
-    <Compile Include="test\test-main.js">
-      <SubType>Code</SubType>
+    <Compile Include="test\test-client.js">
       <TestFramework>Mocha</TestFramework>
     </Compile>
     <Compile Include="test\test-metadata.js">
