@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="lib\client.js" />
     <Compile Include="lib\config.js" />
+    <Compile Include="lib\console.js" />
     <Compile Include="lib\log.js" />
     <Compile Include="lib\main.js" />
     <Compile Include="lib\metadata.js" />
