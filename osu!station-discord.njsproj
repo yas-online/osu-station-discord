@@ -65,6 +65,7 @@
     <Compile Include="lib\log.js" />
     <Compile Include="lib\main.js" />
     <Compile Include="lib\metadata.js" />
+    <Compile Include="lib\stream.js" />
     <Compile Include="test\test-main.js">
       <SubType>Code</SubType>
       <TestFramework>Mocha</TestFramework>

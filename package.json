@@ -36,8 +36,8 @@
 	{
 		"winston": "*",
 		"discordie": "qeled/discordie",
-		"lame": "*",
-		"node-opus": "*"
+		"lame": "yas-online/node-lame#yas",
+		"node-opus": "Rantanen/node-opus"
 	},
 
 	"devDependencies":
