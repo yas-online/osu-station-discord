@@ -10,6 +10,10 @@ platform:
   - x86
   - x64
 
+matrix:
+  allow_failures:
+    - platform: x86
+
 install:
   - ps: Install-Product node $env:node_js $env:platform
   - npm install -g npm
