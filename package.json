@@ -19,17 +19,17 @@
 	},
 	"engines":
 	{
-		"node": ">=6.3.0"
+		"node": ">=6.5.0"
 	},
 	"main": "./lib/main",
 	"scripts":
 	{
-		"start": "node --harmony ./lib/main",
-		"console": "node --harmony ./lib/main remote-console",
-		"test": "mocha --harmony",
-		"test-watch": "mocha --harmony --watch",
-		"debug": "node --harmony debug ./lib/main",
-		"watch": "nodemon --harmony --ignore cfg/ --ignore log/ --ignore test/"
+		"start": "node ./lib/main",
+		"console": "node ./lib/main remote-console",
+		"test": "mocha",
+		"test-watch": "mocha --watch",
+		"debug": "node debug ./lib/main",
+		"watch": "nodemon --ignore cfg/ --ignore log/ --ignore test/"
 	},
 
 	"dependencies":
