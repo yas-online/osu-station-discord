@@ -26,8 +26,8 @@
 	{
 		"start": "node ./lib/main",
 		"console": "node ./lib/main remote-console",
-		"test": "mocha",
-		"test-watch": "mocha --watch",
+		"test": "mocha \"test/test-**.js\"",
+		"test-watch": "mocha --watch \"test/test-**.js\"",
 		"debug": "node debug ./lib/main",
 		"watch": "nodemon --ignore cfg/ --ignore log/ --ignore test/"
 	},
@@ -37,11 +37,12 @@
 		"winston": "*",
 		"discordie": "qeled/discordie",
 		"lame": "yas-online/node-lame#yas",
-		"node-opus": "Rantanen/node-opus"
+		"node-opus": "yas-online/node-opus#yas"
 	},
 
 	"devDependencies":
 	{
+		"mocha": "*",
 		"mock-fs": "*",
 		"chai": "*",
 		"chai-string": "*",
