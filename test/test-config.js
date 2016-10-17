@@ -249,17 +249,8 @@ describe( "Config", function()
 	{
 		afterEach( function()
 		{
-			// that's what I get for tampering with the fs module, oh well...
-			try
-			{
-				let sPath = path.join( g_sConfigPath, "default.json" );
-				let bExists = fs.accessSync( sPath, fs.constants.F_OK );
-
-				if( typeof bExists === "undefined" || bExists === null || bExists ) fs.unlinkSync( sPath );
-			}
-			catch( hException )
-			{
-			}
+			let sPath = path.join( g_sConfigPath, "default.json" );
+			if( fs.existsSync( sPath ) ) fs.unlinkSync( sPath );
 		} );
 
 		describe( "constructor()", function()
