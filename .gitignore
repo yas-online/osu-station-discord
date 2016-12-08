@@ -2,8 +2,5 @@
 /cfg
 /log
 /node_modules
-/obj
 /test/cfg
-/typings*
 *.log
-*.VC.db

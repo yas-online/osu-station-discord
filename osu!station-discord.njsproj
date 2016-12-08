@@ -40,23 +40,6 @@
   <ItemGroup>
     <Folder Include="lib\" />
     <Folder Include="test\" />
-    <Folder Include="typings\" />
-    <Folder Include="typings\globals\" />
-    <Folder Include="typings\globals\chai-string\" />
-    <Folder Include="typings\globals\chai\" />
-    <Folder Include="typings\globals\mocha\" />
-    <Folder Include="typings\globals\mock-fs\" />
-    <Folder Include="typings\globals\node\" />
-    <Folder Include="typings\globals\winston\" />
-  </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="typings\globals\chai-string\index.d.ts" />
-    <TypeScriptCompile Include="typings\globals\chai\index.d.ts" />
-    <TypeScriptCompile Include="typings\globals\mocha\index.d.ts" />
-    <TypeScriptCompile Include="typings\globals\mock-fs\index.d.ts" />
-    <TypeScriptCompile Include="typings\globals\node\index.d.ts" />
-    <TypeScriptCompile Include="typings\globals\winston\index.d.ts" />
-    <TypeScriptCompile Include="typings\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="lib\client.js" />
