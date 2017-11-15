@@ -19,8 +19,9 @@
 	},
 	"engines":
 	{
-		"node": ">=6.5.0"
+		"node": ">=8.0.0"
 	},
+
 	"main": "./lib/main",
 	"scripts":
 	{
@@ -31,21 +32,19 @@
 		"debug": "node debug ./lib/main",
 		"watch": "nodemon --ignore cfg/ --ignore log/ --ignore test/"
 	},
-
 	"dependencies":
 	{
-		"winston": "*",
-		"discordie": "qeled/discordie",
-		"lame": "yas-online/node-lame#yas",
-		"node-opus": "yas-online/node-opus#yas"
+		"discordie": "github:qeled/discordie#dev",
+		"lame": "github:yas-online/node-lame#yas",
+		"node-opus": "github:yas-online/node-opus#yas",
+		"winston": "*"
 	},
-
 	"devDependencies":
 	{
-		"mocha": "*",
-		"mock-fs": "*",
 		"chai": "*",
+		"chai-fs": "*",
 		"chai-string": "*",
-		"chai-fs": "chaijs/chai-fs"
+		"mocha": "*",
+		"mock-fs": "*"
 	}
 }
