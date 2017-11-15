@@ -8,7 +8,7 @@ This bot is designed to provide the very same music that osu!station offers to b
 
 ## Requirements
 
-This bot requires at least NodeJS `6.5.x` to work correctly
+This bot requires at least NodeJS `8.0.x` to work correctly
 
 ## Request bot into discord guild (server)
 Click this: [<img src="https://discordapp.com/assets/fc0b01fe10a0b8c602fb0106d8189d9b.png" alt="Join Discord Guild(Server)" width="128">](https://discordapp.com/oauth2/authorize?client_id=202246859408932864&scope=bot)
